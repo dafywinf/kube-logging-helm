@@ -1,0 +1,53 @@
+# Loki Configuration
+loki:
+  loki:
+    commonConfig:
+      replication_factor: 1
+    useTestSchema: true
+    # TODO - Re-add the schema
+    #    schemaConfig:
+    #      configs:
+    #        - from: "2024-01-01"
+    #          store: tsdb
+    #          index:
+    #            prefix: loki_index_
+    #            period: 24h
+    #          object_store: s3
+    #          schema: v13
+    storage:
+      type: 'filesystem'
+      filesystem:
+        directory: /data/loki
+    # TODO - Remove
+    rulerConfig:
+      storage:
+        type: local
+
+  deploymentMode: SingleBinary
+  singleBinary:
+    replicas: 1
+  backend:
+    replicas: 0
+  read:
+    replicas: 0
+  write:
+    replicas: 0
+
+
+# Promtail Configuration
+promtail:
+  config:
+    clients:
+      - url: http://loki:3100/loki/api/v1/push  # Promtail will push logs to Loki
+    positions:
+      filename: /var/log/positions.yaml  # Track how much of each file has been read
+    scrape_configs:
+      - job_name: system
+        static_configs:
+          - targets:
+              - localhost
+            labels:
+              job: varlogs
+              __path__: /var/log/*log  # Path to system logs to scrape
+  deployment:
+    replicaCount: 1

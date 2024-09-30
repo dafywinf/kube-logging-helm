@@ -1,0 +1,60 @@
+# macOS specific files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# macOS specific files created by Finder
+# Icon? files are created by Finder to store a custom icon for a folder
+Icon?
+# Thumbs.db: stores thumbnails for Windows folder view settings (can appear on shared drives)
+Thumbs.db
+# .Trashes: trash folder
+.Trashes
+# .Spotlight-V100: metadata index files
+.Spotlight-V100
+# .TemporaryItems: temporary files
+.TemporaryItems
+# .fseventsd: file system event files
+.fseventsd
+
+# helm-specific
+charts/
+*.tgz
+*.lock
+
+# Ignore Helm release configuration
+release/
+
+# Ignore Kubernetes secrets
+*.secrets.yaml
+*.secrets.enc.yaml
+
+# Ignore output and log files
+*.log
+*.out
+*.err
+
+# Ignore IDE and editor-specific files (IntelliJ, VSCode, etc.)
+.idea/
+.vscode/
+*.iml
+*.suo
+*.DS_Store
+*.swp
+
+# Node modules and package management (if any dev dependencies exist)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Ignore temporary files and backup files
+*~
+*.tmp
+*.bak
+*.old
+*.orig
+
+# Ignore sensitive files (just as a precaution)
+.env
+.env.*
+secrets.yaml
